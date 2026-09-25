@@ -6,9 +6,8 @@ backend:
   name: github
   repo: motlin/janesterlis.com
   branch: main
-  # After deploying https://github.com/sveltia/sveltia-cms-auth as a Cloudflare Worker, set its URL here
-  # to enable "Sign in with GitHub". Until then, sign in with a GitHub personal access token.
-  # base_url: https://sveltia-cms-auth.<account>.workers.dev
+  # OAuth relay for "Sign In with GitHub": https://github.com/sveltia/sveltia-cms-auth deployed as a Cloudflare Worker.
+  base_url: https://janesterlis-cms-auth.cmotlin.workers.dev
 
 site_url: https://janesterlis.com
 display_url: https://janesterlis.com

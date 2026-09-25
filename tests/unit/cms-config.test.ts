@@ -22,7 +22,7 @@ interface CmsCollection {
 }
 
 interface CmsConfig {
-	backend: {name: string; repo: string; branch: string};
+	backend: {name: string; repo: string; branch: string; base_url: string};
 	collections: CmsCollection[];
 }
 
@@ -42,7 +42,12 @@ const undeclaredKeys = (path: string, fields: CmsField[]): string[] => {
 
 describe("Sveltia CMS config", () => {
 	it("commits to the site's GitHub repository", () => {
-		expect(config.backend).toStrictEqual({name: "github", repo: "motlin/janesterlis.com", branch: "main"});
+		expect(config.backend).toStrictEqual({
+			name: "github",
+			repo: "motlin/janesterlis.com",
+			branch: "main",
+			base_url: "https://janesterlis-cms-auth.cmotlin.workers.dev",
+		});
 	});
 
 	it("covers every content folder", () => {
