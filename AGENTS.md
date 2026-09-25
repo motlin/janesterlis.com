@@ -14,7 +14,7 @@ Jan Esterlis's vintage-guitar site, rebuilt with Astro and deployed to Cloudflar
 
 All site content lives in `src/content/` as Markdown or YAML, validated by the schemas in `src/content.config.ts`. Images live in `src/assets/` and are referenced by relative path from frontmatter. Audio lives in `public/audio/`.
 
-Jan edits content through Sveltia CMS at `/admin` (`public/admin/config.yml`); keep its fields in sync with `src/content.config.ts` (`tests/unit/cms-config.test.ts` enforces this for existing entries). To add content by hand, add a file to the matching collection. See `docs/adding-content.md`. YouTube videos load from the channel feed at build time (`src/lib/youtube.ts`); `.github/workflows/refresh-videos.yml` rebuilds daily.
+Jan edits content through Sveltia CMS at `/admin` (`public/admin/config.yml`); keep its fields in sync with `src/content.config.ts` (`tests/unit/cms-config.test.ts` enforces this for existing entries). To add content by hand, add a file to the matching collection. See `docs/adding-content.md`. YouTube videos load from the channel feed at build time (`src/lib/youtube.ts`); `.github/workflows/refresh-videos.yml` checks hourly and triggers a Cloudflare Pages deploy hook when a new upload is missing from the live site.
 
 ## Astro
 

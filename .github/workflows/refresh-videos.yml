@@ -1,18 +1,31 @@
-# Rebuilds the site daily so new YouTube uploads appear on the Videos page without a commit.
+# Hourly: if Jan's newest YouTube upload isn't on the live Videos page yet, trigger a Cloudflare Pages rebuild.
 # Requires the CLOUDFLARE_DEPLOY_HOOK secret: a Cloudflare Pages deploy hook URL for the production branch.
 
 on:
   schedule:
-    - cron: "0 12 * * *"
+    - cron: "17 * * * *"
   workflow_dispatch:
 
 permissions: {}
 
 jobs:
-  rebuild:
+  refresh:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Cloudflare Pages deploy hook
+      - name: Rebuild when a new video is missing from the site
         env:
           DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
-        run: curl --fail --silent --show-error --request POST "$DEPLOY_HOOK"
+          FEED_URL: https://www.youtube.com/feeds/videos.xml?channel_id=UCnUnYSDt9f9aak7xOp_yCQg
+          VIDEOS_PAGE: https://janesterlis.pages.dev/videos/
+        run: |
+          latest=$(curl --fail --silent --show-error "$FEED_URL" | grep --only-matching --max-count=1 '<yt:videoId>[^<]*' | cut -d'>' -f2)
+          if [ -z "$latest" ]; then
+            echo "Could not read the newest video id from the feed."
+            exit 1
+          fi
+          if curl --fail --silent --show-error "$VIDEOS_PAGE" | grep --quiet "$latest"; then
+            echo "Video $latest is already on the site."
+          else
+            echo "Video $latest is new. Triggering a rebuild."
+            curl --fail --silent --show-error --request POST "$DEPLOY_HOOK"
+          fi
