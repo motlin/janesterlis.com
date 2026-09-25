@@ -98,7 +98,7 @@ E|---------------------------|
 
 ## YouTube videos
 
-Nothing to do. The Videos page and the home page read the latest uploads from [Jan's channel](https://www.youtube.com/@JanEsterlis) whenever the site builds, and the `Refresh videos` GitHub workflow rebuilds the site every day.
+Nothing to do. The Videos page and the home page read the latest uploads from [Jan's channel](https://www.youtube.com/@JanEsterlis) whenever the site builds, and the `refresh-videos` GitHub workflow checks every hour and rebuilds the site when a new upload appears.
 
 ## Everything else
 
