@@ -1,0 +1,205 @@
+# Sveltia CMS: https://sveltiacms.app/en/docs
+# Every save commits to GitHub; Cloudflare Pages then rebuilds the site in about a minute.
+# Field names must match src/content.config.ts. tests/unit/cms-config.test.ts checks existing entries against this file.
+
+backend:
+  name: github
+  repo: motlin/janesterlis.com
+  branch: main
+  # After deploying https://github.com/sveltia/sveltia-cms-auth as a Cloudflare Worker, set its URL here
+  # to enable "Sign in with GitHub". Until then, sign in with a GitHub personal access token.
+  # base_url: https://sveltia-cms-auth.<account>.workers.dev
+
+site_url: https://janesterlis.com
+display_url: https://janesterlis.com
+
+# Fallback only: every collection below stores media next to its entries or in public/audio.
+media_folder: /public/uploads
+public_folder: /uploads
+
+collections:
+  - name: gallery
+    label: Gallery photos
+    label_singular: Gallery photo
+    folder: /src/content/gallery
+    extension: md
+    format: frontmatter
+    create: true
+    media_folder: ""
+    public_folder: ""
+    identifier_field: caption
+    slug: "{{alt}}"
+    summary: "{{caption}}"
+    sortable_fields: [added, caption]
+    fields:
+      - {name: image, label: Photo, widget: image}
+      - name: alt
+        label: Description for screen readers
+        hint: "Who and what is in the photo, e.g. Jan with Al Di Meola."
+      - {name: caption, label: Caption}
+      - {name: year, label: Year taken, widget: number, value_type: int, required: false}
+      - {name: added, label: Date added, widget: datetime, time_format: false, format: YYYY-MM-DD, default: "{{now}}"}
+      - {name: order, label: Order among photos added the same day, widget: number, value_type: int, required: false}
+
+  - name: recordings
+    label: Recordings
+    label_singular: Recording
+    folder: /src/content/recordings
+    extension: md
+    format: frontmatter
+    create: true
+    media_folder: /public/audio
+    public_folder: /audio
+    slug: "{{title}}"
+    summary: "{{title}}"
+    fields:
+      - {name: title, label: Title}
+      - {name: file, label: MP3 file, widget: file, accept: "audio/mpeg"}
+      - {name: year, label: Year recorded, widget: number, value_type: int, required: false}
+      - {name: added, label: Date added, widget: datetime, time_format: false, format: YYYY-MM-DD, default: "{{now}}"}
+      - name: order
+        label: Order among recordings added the same day
+        widget: number
+        value_type: int
+        required: false
+      - {name: body, label: About this recording, widget: richtext, required: false}
+
+  - name: tabs
+    label: Tabs
+    label_singular: Tab
+    folder: /src/content/tabs
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{title}}"
+    summary: "{{title}}{{draft | ternary(' (draft)', '')}}"
+    fields:
+      - {name: title, label: Title}
+      - {name: artist, label: Artist, required: false}
+      - {name: date, label: Date, widget: datetime, time_format: false, format: YYYY-MM-DD, default: "{{now}}"}
+      - name: tuning
+        label: Tuning, low string to high
+        hint: Leave empty for standard tuning (E A D G B E).
+        widget: list
+        required: false
+      - {name: key, label: Key, required: false}
+      - {name: difficulty, label: Level, widget: select, options: [beginner, intermediate, advanced], required: false}
+      - name: recording
+        label: Recording to play along with
+        widget: file
+        accept: "audio/mpeg"
+        media_folder: /public/audio
+        public_folder: /audio
+        required: false
+      - {name: draft, label: Draft (hidden from the live site), widget: boolean, default: false}
+      - name: body
+        label: Lesson and tab
+        widget: richtext
+        hint: "Put tablature in a code block with the language set to tab, so it keeps its columns."
+
+  - name: guitars
+    label: Guitars
+    label_singular: Guitar
+    folder: /src/content/guitars
+    extension: md
+    format: frontmatter
+    create: true
+    media_folder: ""
+    public_folder: ""
+    identifier_field: model
+    slug: "{{year}}-{{model}}"
+    summary: "{{year}} {{model}}"
+    sortable_fields: [year, model]
+    fields:
+      - {name: year, label: Year, widget: number, value_type: int}
+      - {name: model, label: Model, hint: "e.g. Fender Stratocaster, Fiesta Red"}
+      - name: family
+        label: Family
+        widget: select
+        options:
+          - {label: Gibson, value: gibson}
+          - {label: Stratocaster, value: stratocaster}
+          - {label: Telecaster, value: telecaster}
+          - {label: Other, value: other}
+      - {name: image, label: Photo, widget: image}
+      - {name: alt, label: Photo description for screen readers}
+      - name: audio
+        label: Sound sample
+        widget: file
+        accept: "audio/mpeg"
+        media_folder: /public/audio
+        public_folder: /audio
+        required: false
+      - {name: body, label: Story, widget: richtext, required: false}
+
+  - name: gear
+    label: Gear
+    label_singular: Gear item
+    folder: /src/content/gear
+    extension: md
+    format: frontmatter
+    create: true
+    media_folder: ""
+    public_folder: ""
+    slug: "{{order}}-{{title}}"
+    summary: "{{title}}"
+    sortable_fields: [order, title]
+    fields:
+      - {name: title, label: Title}
+      - {name: order, label: Position on the page, widget: number, value_type: int}
+      - {name: image, label: Photo, widget: image}
+      - {name: alt, label: Photo description for screen readers}
+      - {name: body, label: Description, widget: richtext}
+
+  - name: pages
+    label: Pages
+    media_folder: ""
+    public_folder: ""
+    files:
+      - name: home
+        label: Home page
+        file: /src/content/pages/home.md
+        fields:
+          - {name: title, label: Tagline}
+          - {name: description, label: Search engine description}
+          - {name: body, label: Welcome text, widget: richtext}
+      - name: bio
+        label: Biography
+        file: /src/content/pages/bio.md
+        fields:
+          - {name: title, label: Title}
+          - {name: description, label: Search engine description}
+          - &photos
+            name: photos
+            label: Photos
+            widget: list
+            fields:
+              - {name: image, label: Photo, widget: image}
+              - {name: alt, label: Description for screen readers}
+              - {name: caption, label: Caption}
+          - {name: body, label: Biography, widget: richtext}
+      - name: collection
+        label: Collection page
+        file: /src/content/pages/collection.md
+        fields:
+          - {name: title, label: Title}
+          - {name: description, label: Search engine description}
+          - *photos
+          - {name: body, label: Introduction, widget: richtext}
+
+  - name: links
+    label: Links
+    files:
+      - name: links
+        label: Links for collectors
+        file: /src/content/links.yaml
+        fields:
+          - name: links
+            label: Links
+            widget: list
+            root: true
+            fields:
+              - {name: id, label: ID, hint: "Short unique name, e.g. vintage-guitar"}
+              - {name: title, label: Title}
+              - {name: url, label: URL}
+              - {name: description, label: Description}

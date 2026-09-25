@@ -2,19 +2,19 @@
 title: Biography
 description: From Kiev to the blues. How Jan Esterlis found lead guitar.
 photos:
-    - image: ./bio/1975.jpg
+    - image: bio-1975.jpg
       alt: Two young guitarists performing on stage in the 1970s
       caption: "1975"
-    - image: ./bio/1970s.jpg
+    - image: bio-1970s.jpg
       alt: Jan and a friend in a 1970s portrait
       caption: 1970s
-    - image: ./bio/1974.jpg
+    - image: bio-1974.jpg
       alt: Jan playing acoustic guitar beside a singer in 1974
       caption: "1974"
-    - image: ./bio/1980s-band.jpg
+    - image: bio-1980s-band.jpg
       alt: Jan playing with his band in a rehearsal room in the 1980s
       caption: 1980s
-    - image: ./bio/1980s-stage.jpg
+    - image: bio-1980s-stage.jpg
       alt: Jan's band on stage with a singer in the 1980s
       caption: 1980s
 ---

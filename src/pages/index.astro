@@ -3,7 +3,6 @@ import {Image} from "astro:assets";
 import {getCollection, getEntry, render} from "astro:content";
 import VideoCard from "../components/VideoCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import guitarWall from "../assets/hero/guitar-wall.jpg";
 import splash from "../assets/hero/splash.jpg";
 
 const home = await getEntry("pages", "home");
@@ -38,12 +37,7 @@ const sections = [
 			</div>
 		</div>
 		<div class="hero-image">
-			<div data-hero-for="stage">
-				<Image src={splash} alt="Jan on stage with a white Stratocaster" loading="eager" widths={[480, 727]} sizes="(max-width: 860px) 100vw, 540px" />
-			</div>
-			<div data-hero-for="catalog gallery">
-				<Image src={guitarWall} alt="A row of vintage Fender and Gibson guitars on stands" widths={[550]} sizes="(max-width: 860px) 100vw, 540px" />
-			</div>
+			<Image src={splash} alt="Jan on stage with a white Stratocaster" loading="eager" widths={[480, 727]} sizes="(max-width: 860px) 100vw, 540px" />
 		</div>
 	</section>
 

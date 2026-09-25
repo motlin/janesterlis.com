@@ -33,9 +33,8 @@ for (const {path, heading} of pages) {
 			expect(errors).toStrictEqual([]);
 		});
 
-		test("loads every visible image", async ({page}) => {
+		test("loads every image", async ({page}) => {
 			await page.goto(path);
-			// Each look hides the other looks' hero photos, so only rendered images must load.
 			const visible = page.locator("main img:visible");
 			for (const image of await visible.all()) {
 				await image.scrollIntoViewIfNeeded();

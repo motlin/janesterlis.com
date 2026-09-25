@@ -2,6 +2,7 @@
 import {Image} from "astro:assets";
 import {getCollection, getEntry, render} from "astro:content";
 import PhotoGrid from "../../components/PhotoGrid.astro";
+import guitarWall from "../../assets/hero/guitar-wall.jpg";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import {guitarTitle, sortGuitars} from "../../lib/guitars";
 
@@ -17,6 +18,15 @@ const guitars = sortGuitars(await getCollection("guitars"));
 	<p class="eyebrow">Vintage Gibson &amp; Fender</p>
 	<h1>{page.data.title}</h1>
 	<div class="prose lede"><Content /></div>
+	<div class="feature-image collection-wall">
+		<Image
+			src={guitarWall}
+			alt="A row of vintage Fender and Gibson guitars on stands"
+			loading="eager"
+			widths={[550]}
+			sizes="(max-width: 600px) 100vw, 550px"
+		/>
+	</div>
 
 	<ul class="card-grid guitar-grid" aria-label="Guitars">
 		{

@@ -1,10 +1,6 @@
-/*
- * Three candidate looks share one layout. Each look is a set of tokens on :root[data-look=…],
- * plus a few look-specific touches at the bottom of this file.
- */
+/* Stage look: dark room, warm amp glow. Colors and type live in these tokens. */
 
-:root,
-:root[data-look="stage"] {
+:root {
 	--bg: #0c0908;
 	--bg-glow: radial-gradient(120% 70% at 50% -10%, #3a120c 0%, #0c0908 60%);
 	--surface: #17110f;
@@ -25,52 +21,6 @@
 	--photo-frame: 0;
 	--header-bg: rgb(12 9 8 / 85%);
 	color-scheme: dark;
-}
-
-:root[data-look="catalog"] {
-	--bg: #f3ead8;
-	--bg-glow: linear-gradient(#f3ead8, #efe3cc);
-	--surface: #fbf6ea;
-	--surface-2: #efe4cf;
-	--text: #2b2016;
-	--muted: #6d5b45;
-	--accent: #b0271c;
-	--accent-2: #1f5f5b;
-	--on-accent: #fff8ec;
-	--border: #cdb994;
-	--font-display: "DM Serif Display", Georgia, serif;
-	--font-body: "Source Serif 4", Georgia, serif;
-	--display-transform: none;
-	--display-tracking: 0;
-	--display-weight: 400;
-	--radius: 2px;
-	--shadow: 0 2px 0 #d8c7a4, 0 8px 18px rgb(80 50 20 / 18%);
-	--photo-frame: 8px;
-	--header-bg: rgb(243 234 216 / 92%);
-	color-scheme: light;
-}
-
-:root[data-look="gallery"] {
-	--bg: #ffffff;
-	--bg-glow: #ffffff;
-	--surface: #f6f6f5;
-	--surface-2: #ececea;
-	--text: #151515;
-	--muted: #6b6b6b;
-	--accent: #151515;
-	--accent-2: #8a6d3b;
-	--on-accent: #ffffff;
-	--border: #e3e3e1;
-	--font-display: "Inter", system-ui, sans-serif;
-	--font-body: "Inter", system-ui, sans-serif;
-	--display-transform: none;
-	--display-tracking: -0.02em;
-	--display-weight: 650;
-	--radius: 4px;
-	--shadow: none;
-	--photo-frame: 0;
-	--header-bg: rgb(255 255 255 / 92%);
-	color-scheme: light;
 }
 
 /* Base */
@@ -297,11 +247,11 @@ main {
 	}
 }
 
-/* Footer and look picker */
+/* Footer */
 
 .site-footer {
 	border-top: 1px solid var(--border);
-	padding-block: 2rem 6rem;
+	padding-block: 2rem;
 	color: var(--muted);
 	font-size: 0.95rem;
 }
@@ -311,53 +261,6 @@ main {
 	flex-wrap: wrap;
 	gap: 0.5rem 2rem;
 	justify-content: space-between;
-}
-
-.look-picker {
-	position: fixed;
-	z-index: 30;
-	bottom: 1rem;
-	left: 50%;
-	translate: -50% 0;
-	display: flex;
-	align-items: center;
-	gap: 0.25rem;
-	padding: 0.3rem;
-	max-width: calc(100% - 2rem);
-	background: var(--surface);
-	border: 1px solid var(--border);
-	border-radius: 999px;
-	box-shadow: 0 6px 24px rgb(0 0 0 / 25%);
-	font-family: "Inter", system-ui, sans-serif;
-	font-size: 0.85rem;
-}
-
-.look-picker-label {
-	padding-inline: 0.6rem 0.2rem;
-	color: var(--muted);
-	white-space: nowrap;
-}
-
-.look-picker button {
-	font: inherit;
-	font-weight: 600;
-	color: var(--text);
-	background: transparent;
-	border: 0;
-	border-radius: 999px;
-	padding: 0.4rem 0.8rem;
-	cursor: pointer;
-}
-
-.look-picker button[aria-pressed="true"] {
-	background: var(--accent);
-	color: var(--on-accent);
-}
-
-@media (max-width: 420px) {
-	.look-picker-label {
-		display: none;
-	}
 }
 
 /* Hero */
@@ -832,65 +735,16 @@ pre.tab {
 	color: var(--muted);
 }
 
-/* Look-specific touches */
+/* Stage glow */
 
-[data-look="stage"] .hero-image {
+.hero-image {
 	box-shadow:
 		0 0 80px rgb(255 90 60 / 25%),
 		var(--shadow);
 }
 
-[data-look="stage"] h1 {
+h1 {
 	text-shadow: 0 0 30px rgb(255 90 60 / 35%);
-}
-
-[data-look="catalog"] h1,
-[data-look="catalog"] h2 {
-	font-style: italic;
-}
-
-[data-look="catalog"] .site-header {
-	border-bottom: 3px double var(--border);
-}
-
-[data-look="catalog"] .eyebrow {
-	font-family: var(--font-body);
-	color: var(--accent-2);
-}
-
-[data-look="catalog"] .photo-grid li:nth-child(odd) figure {
-	rotate: -0.6deg;
-}
-
-[data-look="catalog"] .photo-grid li:nth-child(even) figure {
-	rotate: 0.5deg;
-}
-
-[data-look="gallery"] .card,
-[data-look="gallery"] .photo-grid figure,
-[data-look="gallery"] .recording,
-[data-look="gallery"] .link-list li {
-	border-color: transparent;
-}
-
-[data-look="gallery"] .eyebrow {
-	color: var(--muted);
-}
-
-[data-look="gallery"] .nav-list a[aria-current="page"] {
-	color: var(--text);
-	box-shadow: inset 0 -2px 0 var(--text);
-}
-
-/* Each look picks its own hero photo. */
-[data-hero-for] {
-	display: none;
-}
-
-:root[data-look="stage"] [data-hero-for~="stage"],
-:root[data-look="catalog"] [data-hero-for~="catalog"],
-:root[data-look="gallery"] [data-hero-for~="gallery"] {
-	display: block;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -900,4 +754,9 @@ pre.tab {
 		transition: none !important;
 		scroll-behavior: auto !important;
 	}
+}
+
+.collection-wall {
+	max-width: 550px;
+	margin-block: 1.5rem 0.5rem;
 }
