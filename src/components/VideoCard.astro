@@ -1,0 +1,44 @@
+---
+interface Props {
+	id: string;
+	title: string;
+	published: Date;
+	eager?: boolean;
+}
+
+const {id, title, published, eager = false} = Astro.props;
+const date = published.toLocaleDateString("en-US", {year: "numeric", month: "long", day: "numeric", timeZone: "UTC"});
+---
+
+<figure class="video">
+	<div class="video-frame">
+		<button type="button" class="video-play" data-video-id={id} data-title={title} aria-label={`Play: ${title}`}>
+			<img
+				src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+				alt=""
+				width="480"
+				height="360"
+				loading={eager ? "eager" : "lazy"}
+			/>
+			<span class="play-icon"></span>
+		</button>
+	</div>
+	<figcaption>
+		{title}
+		<time datetime={published.toISOString()}>{date}</time>
+	</figcaption>
+</figure>
+
+<script>
+	// Load YouTube's player only on click: faster pages, and no YouTube cookies until a visitor opts in.
+	for (const button of document.querySelectorAll<HTMLButtonElement>(".video-play")) {
+		button.addEventListener("click", () => {
+			const iframe = document.createElement("iframe");
+			iframe.src = `https://www.youtube-nocookie.com/embed/${button.dataset["videoId"] ?? ""}?autoplay=1&rel=0`;
+			iframe.title = button.dataset["title"] ?? "YouTube video";
+			iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+			iframe.allowFullscreen = true;
+			button.replaceWith(iframe);
+		});
+	}
+</script>

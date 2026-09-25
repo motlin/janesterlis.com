@@ -1,0 +1,45 @@
+---
+import {Image} from "astro:assets";
+import {getCollection} from "astro:content";
+import lick from "../../assets/tabs/handwritten-lick.jpg";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {SHOW_DRAFTS} from "../../lib/drafts";
+import {formatTuning, publishedTabs} from "../../lib/tabs";
+
+const tabs = publishedTabs(await getCollection("tabs"), SHOW_DRAFTS);
+---
+
+<BaseLayout title="Tabs" description="Guitar tabs and lessons from Jan Esterlis.">
+	<p class="eyebrow">Licks · Lessons</p>
+	<h1>Tabs</h1>
+	<div class="feature">
+		<div class="feature-image">
+			<Image src={lick} alt="A handwritten blues lick in standard notation and tablature" widths={[364]} />
+		</div>
+		<p class="lede">Licks, riffs, and lessons, written out in tab.</p>
+	</div>
+	{
+		tabs.length === 0 ? (
+			<p class="empty-state">New tabs are on the way. Check back soon!</p>
+		) : (
+			<ul class="card-grid" aria-label="Tabs">
+				{tabs.map((tab) => (
+					<li>
+						<a class="card" href={`/tabs/${tab.id}/`}>
+							<div class="card-body">
+								<h3>
+									{tab.data.title} {tab.data.draft && <span class="badge">Draft</span>}
+								</h3>
+								<p>
+									{[tab.data.artist, tab.data.key && `Key of ${tab.data.key}`, formatTuning(tab.data.tuning)]
+										.filter(Boolean)
+										.join(" · ")}
+								</p>
+							</div>
+						</a>
+					</li>
+				))}
+			</ul>
+		)
+	}
+</BaseLayout>

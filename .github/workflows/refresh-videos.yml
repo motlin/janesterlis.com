@@ -1,0 +1,18 @@
+# Rebuilds the site daily so new YouTube uploads appear on the Videos page without a commit.
+# Requires the CLOUDFLARE_DEPLOY_HOOK secret: a Cloudflare Pages deploy hook URL for the production branch.
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages deploy hook
+        env:
+          DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+        run: curl --fail --silent --show-error --request POST "$DEPLOY_HOOK"

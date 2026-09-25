@@ -1,0 +1,27 @@
+---
+import {Image} from "astro:assets";
+import {getCollection, render} from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const gear = (await getCollection("gear")).toSorted((a, b) => a.data.order - b.data.order);
+const items = await Promise.all(gear.map(async (item) => ({item, Content: (await render(item)).Content})));
+---
+
+<BaseLayout title="Gear" description="Jan Esterlis's vintage amps, effects, and signal chain.">
+	<p class="eyebrow">Amps · Effects</p>
+	<h1>Gear</h1>
+	<p class="lede">Vintage amps and a pedalboard built around the '70s classic rock sound.</p>
+	{
+		items.map(({item, Content}) => (
+			<section class="feature">
+				<div class="feature-image">
+					<Image src={item.data.image} alt={item.data.alt} widths={[480, 600]} sizes="(max-width: 760px) 100vw, 600px" />
+				</div>
+				<div>
+					<h2>{item.data.title}</h2>
+					<Content />
+				</div>
+			</section>
+		))
+	}
+</BaseLayout>

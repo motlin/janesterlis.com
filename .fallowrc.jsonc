@@ -1,0 +1,9 @@
+{
+	"$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+	"entry": ["astro.config.mjs", "src/pages/**/*.astro", "src/content.config.ts"],
+	// Astro loads sharp dynamically for image optimization, so fallow cannot see the import.
+	"ignoreDependencies": ["sharp"],
+	"rules": {
+		"unused-dependencies": "warn",
+	},
+}

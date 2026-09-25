@@ -1,0 +1,15 @@
+---
+import {getCollection} from "astro:content";
+import PhotoGrid from "../components/PhotoGrid.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {newestFirst} from "../lib/ordering";
+
+const photos = newestFirst(await getCollection("gallery")).map((entry) => entry.data);
+---
+
+<BaseLayout title="Friends & Gallery" description="Jan Esterlis with guitar heroes and friends.">
+	<p class="eyebrow">Friends · Jams · Heroes</p>
+	<h1>Friends &amp; Gallery</h1>
+	<p class="lede">Guitar heroes, friends, and jams over the years. Tap a photo to see it larger.</p>
+	<PhotoGrid photos={photos} label="Gallery" />
+</BaseLayout>

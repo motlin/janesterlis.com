@@ -1,0 +1,21 @@
+---
+import {getEntry, render} from "astro:content";
+import PhotoGrid from "../components/PhotoGrid.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const bio = await getEntry("pages", "bio");
+if (!bio) {
+	throw new Error("Missing src/content/pages/bio.md");
+}
+const {Content} = await render(bio);
+---
+
+<BaseLayout title={bio.data.title} description={bio.data.description}>
+	<p class="eyebrow">Kiev · 1970s · Today</p>
+	<h1>{bio.data.title}</h1>
+	<div class="prose">
+		<Content />
+	</div>
+	<h2>Photos from the early years</h2>
+	<PhotoGrid photos={bio.data.photos} label="Early years" />
+</BaseLayout>

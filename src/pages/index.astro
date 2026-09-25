@@ -1,0 +1,85 @@
+---
+import {Image} from "astro:assets";
+import {getCollection, getEntry, render} from "astro:content";
+import VideoCard from "../components/VideoCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import guitarWall from "../assets/hero/guitar-wall.jpg";
+import splash from "../assets/hero/splash.jpg";
+
+const home = await getEntry("pages", "home");
+if (!home) {
+	throw new Error("Missing src/content/pages/home.md");
+}
+const {Content} = await render(home);
+const [latestVideo] = (await getCollection("videos")).toSorted(
+	(a, b) => b.data.published.getTime() - a.data.published.getTime(),
+);
+
+const sections = [
+	{href: "/collection/", title: "The Collection", text: "Gibsons, Strats, and Teles from the '50s and '60s."},
+	{href: "/gear/", title: "Gear", text: "Vintage amps and a pedalboard full of '70s tone."},
+	{href: "/gallery/", title: "Friends & Gallery", text: "Al Di Meola, Joe Bonamassa, Robben Ford, and more."},
+	{href: "/listen/", title: "Listen", text: "Basement jams and funk grooves."},
+	{href: "/videos/", title: "Videos", text: "The latest jams from Jan's YouTube channel."},
+	{href: "/tabs/", title: "Tabs", text: "Licks and lessons, written out."},
+	{href: "/bio/", title: "Biography", text: "From Kiev to the blues."},
+];
+---
+
+<BaseLayout title={home.data.title} description={home.data.description}>
+	<section class="hero">
+		<div>
+			<p class="eyebrow">Vintage guitars · Good music</p>
+			<h1>Jan Esterlis</h1>
+			<p class="tagline">{home.data.title}</p>
+			<div class="actions">
+				<a class="button" href="/collection/">See the collection</a>
+				<a class="button secondary" href="/listen/">Listen</a>
+			</div>
+		</div>
+		<div class="hero-image">
+			<div data-hero-for="stage">
+				<Image src={splash} alt="Jan on stage with a white Stratocaster" loading="eager" widths={[480, 727]} sizes="(max-width: 860px) 100vw, 540px" />
+			</div>
+			<div data-hero-for="catalog gallery">
+				<Image src={guitarWall} alt="A row of vintage Fender and Gibson guitars on stands" widths={[550]} sizes="(max-width: 860px) 100vw, 540px" />
+			</div>
+		</div>
+	</section>
+
+	<section class="prose" aria-label="Welcome">
+		<Content />
+	</section>
+
+	{
+		latestVideo && (
+			<section class="latest-video" aria-labelledby="latest-video">
+				<VideoCard id={latestVideo.id} title={latestVideo.data.title} published={latestVideo.data.published} />
+				<div>
+					<p class="eyebrow">New on YouTube</p>
+					<h2 id="latest-video">Latest video</h2>
+					<p>Fresh jams land on the channel regularly.</p>
+					<a class="button secondary" href="/videos/">
+						All videos
+					</a>
+				</div>
+			</section>
+		)
+	}
+
+	<h2>Explore</h2>
+	<ul class="card-grid">
+		{
+			sections.map((section) => (
+				<li>
+					<a class="card" href={section.href}>
+						<div class="card-body">
+							<h3>{section.title}</h3>
+							<p>{section.text}</p>
+						</div>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</BaseLayout>

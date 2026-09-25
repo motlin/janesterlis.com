@@ -1,0 +1,50 @@
+---
+import type {GetStaticPaths} from "astro";
+import {Image} from "astro:assets";
+import {getCollection, render} from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {FAMILY_LABELS, guitarTitle, sortGuitars} from "../../lib/guitars";
+
+export const getStaticPaths = (async () => {
+	const guitars = sortGuitars(await getCollection("guitars"));
+	return guitars.map((guitar, index) => ({
+		params: {id: guitar.id},
+		props: {
+			guitar,
+			previous: guitars[(index - 1 + guitars.length) % guitars.length],
+			next: guitars[(index + 1) % guitars.length],
+		},
+	}));
+}) satisfies GetStaticPaths;
+
+const {guitar, previous, next} = Astro.props;
+const {Content} = await render(guitar);
+const title = guitarTitle(guitar.data);
+---
+
+<BaseLayout title={title} description={`${title} from Jan Esterlis's vintage guitar collection.`}>
+	<p class="eyebrow"><a href="/collection/">The Collection</a> · {FAMILY_LABELS[guitar.data.family]}</p>
+	<div class="feature">
+		<div class="feature-image guitar-card">
+			<div class="guitar-photo">
+				<Image src={guitar.data.image} alt={guitar.data.alt} loading="eager" widths={[337, 674]} sizes="337px" />
+			</div>
+		</div>
+		<div>
+			<h1>{title}</h1>
+			<div class="prose"><Content /></div>
+			{
+				guitar.data.audio !== undefined && (
+					<div class="recording">
+						<h2>Hear it</h2>
+						<audio controls preload="none" src={guitar.data.audio} />
+					</div>
+				)
+			}
+			<p class="actions">
+				{previous && <a class="button secondary" href={`/collection/${previous.id}/`}>← {guitarTitle(previous.data)}</a>}
+				{next && <a class="button secondary" href={`/collection/${next.id}/`}>{guitarTitle(next.data)} →</a>}
+			</p>
+		</div>
+	</div>
+</BaseLayout>

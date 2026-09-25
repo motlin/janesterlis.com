@@ -1,0 +1,49 @@
+---
+import {LOOK_STORAGE_KEY, LOOKS} from "../lib/looks";
+---
+
+<div class="look-picker" role="group" aria-label="Choose a look" data-storage-key={LOOK_STORAGE_KEY}>
+	<span class="look-picker-label">Look:</span>
+	{
+		LOOKS.map((look) => (
+			<button type="button" data-look-id={look.id} title={look.description} aria-pressed="false">
+				{look.label}
+			</button>
+		))
+	}
+</div>
+
+<script>
+	const picker = document.querySelector<HTMLElement>(".look-picker");
+	const storageKey = picker?.dataset["storageKey"] ?? "look";
+	const buttons = [...(picker?.querySelectorAll<HTMLButtonElement>("button[data-look-id]") ?? [])];
+
+	const save = (look: string): void => {
+		try {
+			localStorage.setItem(storageKey, look);
+		} catch {
+			// Storage can be unavailable (private mode); the look still applies to this page.
+		}
+	};
+
+	const show = (look: string): void => {
+		document.documentElement.dataset["look"] = look;
+		for (const button of buttons) {
+			button.setAttribute("aria-pressed", String(button.dataset["lookId"] === look));
+		}
+	};
+
+	const current = document.documentElement.dataset["look"] ?? "";
+	show(current);
+	if (new URLSearchParams(location.search).has("look")) {
+		save(current);
+	}
+
+	for (const button of buttons) {
+		button.addEventListener("click", () => {
+			const look = button.dataset["lookId"] ?? "";
+			show(look);
+			save(look);
+		});
+	}
+</script>

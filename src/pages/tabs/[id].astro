@@ -1,0 +1,39 @@
+---
+import type {GetStaticPaths} from "astro";
+import {getCollection, render} from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {SHOW_DRAFTS} from "../../lib/drafts";
+import {formatTuning, publishedTabs} from "../../lib/tabs";
+
+export const getStaticPaths = (async () =>
+	publishedTabs(await getCollection("tabs"), SHOW_DRAFTS).map((tab) => ({
+		params: {id: tab.id},
+		props: {tab},
+	}))) satisfies GetStaticPaths;
+
+const {tab} = Astro.props;
+const {Content} = await render(tab);
+const byline = tab.data.artist === undefined ? "" : ` by ${tab.data.artist}`;
+---
+
+<BaseLayout title={tab.data.title} description={`Guitar tab: ${tab.data.title}${byline}.`}>
+	<p class="eyebrow"><a href="/tabs/">Tabs</a>{tab.data.draft && <> · <span class="badge">Draft</span></>}</p>
+	<h1>{tab.data.title}</h1>
+	<ul class="tab-meta">
+		{tab.data.artist !== undefined && <li><strong>Artist:</strong> {tab.data.artist}</li>}
+		<li><strong>Tuning:</strong> {formatTuning(tab.data.tuning)}</li>
+		{tab.data.key !== undefined && <li><strong>Key:</strong> {tab.data.key}</li>}
+		{tab.data.difficulty !== undefined && <li><strong>Level:</strong> {tab.data.difficulty}</li>}
+	</ul>
+	{
+		tab.data.recording !== undefined && (
+			<div class="recording">
+				<h2>Listen along</h2>
+				<audio controls preload="none" src={tab.data.recording} />
+			</div>
+		)
+	}
+	<div class="prose tab-body">
+		<Content />
+	</div>
+</BaseLayout>

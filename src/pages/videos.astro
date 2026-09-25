@@ -1,0 +1,36 @@
+---
+import {getCollection} from "astro:content";
+import VideoCard from "../components/VideoCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {YOUTUBE_CHANNEL_URL} from "../lib/youtube";
+
+const videos = (await getCollection("videos")).toSorted(
+	(a, b) => b.data.published.getTime() - a.data.published.getTime(),
+);
+---
+
+<BaseLayout title="Videos" description="Jan Esterlis's latest guitar videos from YouTube.">
+	<p class="eyebrow">On YouTube</p>
+	<h1>Videos</h1>
+	<p class="lede">
+		Jams, blues, and new ideas. The newest uploads from Jan's <a href={YOUTUBE_CHANNEL_URL} rel="noopener">YouTube channel</a>.
+	</p>
+	{
+		videos.length === 0 ? (
+			<p class="empty-state">
+				Videos are loading slowly today. Watch them on <a href={YOUTUBE_CHANNEL_URL}>YouTube</a>.
+			</p>
+		) : (
+			<ul class="video-grid" aria-label="Videos">
+				{videos.map((video) => (
+					<li>
+						<VideoCard id={video.id} title={video.data.title} published={video.data.published} />
+					</li>
+				))}
+			</ul>
+		)
+	}
+	<p class="actions" style="margin-top: 2rem">
+		<a class="button" href={YOUTUBE_CHANNEL_URL} rel="noopener">Subscribe on YouTube</a>
+	</p>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import {Image} from "astro:assets";
+import {getCollection, getEntry, render} from "astro:content";
+import PhotoGrid from "../../components/PhotoGrid.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {guitarTitle, sortGuitars} from "../../lib/guitars";
+
+const page = await getEntry("pages", "collection");
+if (!page) {
+	throw new Error("Missing src/content/pages/collection.md");
+}
+const {Content} = await render(page);
+const guitars = sortGuitars(await getCollection("guitars"));
+---
+
+<BaseLayout title={page.data.title} description={page.data.description}>
+	<p class="eyebrow">Vintage Gibson &amp; Fender</p>
+	<h1>{page.data.title}</h1>
+	<div class="prose lede"><Content /></div>
+
+	<ul class="card-grid guitar-grid" aria-label="Guitars">
+		{
+			guitars.map((guitar) => (
+				<li>
+					<a class="card guitar-card" href={`/collection/${guitar.id}/`} aria-label={guitarTitle(guitar.data)}>
+						<div class="guitar-photo">
+							<Image src={guitar.data.image} alt={guitar.data.alt} widths={[200, 337]} sizes="(max-width: 520px) 45vw, 170px" />
+						</div>
+						<div class="card-body">
+							<span class="year">{guitar.data.year}</span>
+							<h3>{guitar.data.model}</h3>
+						</div>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+
+	<h2>Around the music room</h2>
+	<PhotoGrid photos={page.data.photos} label="Around the music room" />
+</BaseLayout>

@@ -1,0 +1,45 @@
+{
+	"name": "janesterlis-com",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Jan Esterlis :: Vintage Guitars and Good Music",
+	"type": "module",
+	"scripts": {
+		"preinstall": "npx only-allow pnpm",
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"check": "vp check",
+		"oxlint": "vp lint . --fix",
+		"oxlint:ci": "vp lint . --format github",
+		"fmt": "vp fmt",
+		"fmt:ci": "vp fmt --check",
+		"fallow": "fallow fix --yes",
+		"fallow:ci": "fallow dead-code",
+		"typecheck": "astro check",
+		"test": "node node_modules/vitest/dist/cli.js",
+		"test:e2e": "playwright test",
+		"prepare": "VITE_GIT_HOOKS=0 vp config"
+	},
+	"dependencies": {
+		"astro": "^7.3.5",
+		"satteri": "0.10.5",
+		"sharp": "^0.35.4"
+	},
+	"devDependencies": {
+		"@astrojs/check": "^0.9.10",
+		"@astrojs/markdown-satteri": "0.4.2",
+		"@playwright/test": "^1.63.0",
+		"@types/node": "^26.4.1",
+		"fallow": "^3.22.0",
+		"markdownlint-cli2": "^0.23.2",
+		"typescript": "^6.0.3",
+		"vite-plus": "catalog:",
+		"vitest": "catalog:"
+	},
+	"engines": {
+		"node": ">=22.12.0"
+	},
+	"packageManager": "pnpm@12.4.1"
+}

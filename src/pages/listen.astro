@@ -1,0 +1,27 @@
+---
+import {getCollection, render} from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {newestFirst} from "../lib/ordering";
+
+const recordings = await Promise.all(
+	newestFirst(await getCollection("recordings")).map(async (recording) => ({
+		recording,
+		Content: (await render(recording)).Content,
+	})),
+);
+---
+
+<BaseLayout title="Listen" description="Recordings by Jan Esterlis and friends.">
+	<p class="eyebrow">Recordings</p>
+	<h1>Listen</h1>
+	<p class="lede">Jams and grooves from the basement.</p>
+	{
+		recordings.map(({recording, Content}) => (
+			<article class="recording" id={recording.id}>
+				<h2>{recording.data.title}</h2>
+				<Content />
+				<audio controls preload="metadata" src={recording.data.file} />
+			</article>
+		))
+	}
+</BaseLayout>
