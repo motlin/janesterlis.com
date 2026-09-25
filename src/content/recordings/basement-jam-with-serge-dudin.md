@@ -6,4 +6,4 @@ added: 2026-09-25
 order: 1
 ---
 
-One day Serge and Jan got together in Jan's basement to jam on some blues themes, experimenting with various effects and amp setups. The guys trade solos to create a variety of styles and sounds.
+One day Serge and Jan got together in Jan's basement to jam on some blues themes, experimenting with various effects and amp setups. Take a listen to the result of the basement jam... Guys were trading solos to create variety of styles and sounds

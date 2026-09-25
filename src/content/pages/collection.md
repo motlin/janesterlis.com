@@ -4,7 +4,7 @@ description: Vintage Gibsons, Stratocasters, and Telecasters from Jan Esterlis's
 photos:
     - image: collection-three-born-in-1957.jpg
       alt: Jan seated with a 1957 Stratocaster and a 1957 Fender Deluxe amp
-      caption: "All three were born in 1957: a Fender Stratocaster, a Fender Deluxe, and Jan Esterlis"
+      caption: "All Three were born in 1957 - Fender Stratocaster, Fender Deluxe and Jan Esterlis"
     - image: collection-dsc-7184.jpg
       alt: Three guitars hanging on a wall
       caption: On the wall
@@ -34,4 +34,4 @@ photos:
       caption: On the wall
 ---
 
-My guitar collection.
+My guitar collection

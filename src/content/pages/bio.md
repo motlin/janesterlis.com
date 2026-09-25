@@ -19,14 +19,12 @@ photos:
       caption: 1980s
 ---
 
-I was born and raised in Kiev, Ukraine. My first musical influence was my older brother, who was in a band by the time I was 12 years old. Once I saw his band rehearsing, it was decided: lead guitar is my destiny.
+I was born and raised in Kiev, Ukraine. My first musical influence was my older brother, who was in the band by the time I was 12 years old. Once I saw his band rehearsing, it was decided — lead guitar is my destiny.
 
-So I started to play at home on an old acoustic with very high action and bad intonation. Then my parents, seeing me being a very persistent guitar scholar and a good student at school, bought me my first electric. It was a Czech-made Jolana. It sounded pretty cool, and soon enough I became a very popular guitar player in the neighborhood. By the time I was 14, I could play Beatles songs and some Russian rock tunes.
+So I started to play at home using old acoustic with very high action and bad intonation. Then my parents, seeing me being very persistent guitar scholar and good student at school, bought me my first electric. It was Czech-made Iolana. It sounded pretty cool and soon enough I became a very popular guitar player in the neighborhood. By the time I was 14, I could play the Beatles songs, some Russian Rock tunes.
 
-As a kid I loved Deep Purple, ELP, Uriah Heep, Queen, and Pink Floyd. But it was Jimi who turned me on to the school of "How can you merge rock and blues!" Then I discovered the amazing technique and melody of Jeff Beck and Gary Moore, but I always had a love for bluesy players like Eric Clapton and David Gilmour.
+As a kid I loved Deep Purple, ELP, Uriah Heep, Queen, Pink Floyd. But it was Jimi, who turned me onto the school of "How can you merge rock and blues!" Then I discovered the amazing technique and melody of Jeff Beck and Gary Moore but always had a love for blusey players like Eric Clapton and David Gilmore. I have played in various bands semi professionally — weddings, anniversaries. I tried to learn the theory on my own, but never became really proficient to read music. I've just always played what I felt and learned the old fashioned way of practicing everyday, making every note count and feeling everything.
 
-I have played in various bands semi-professionally: weddings, anniversaries. I tried to learn theory on my own, but never became really proficient at reading music. I've just always played what I felt and learned the old-fashioned way: practicing every day, making every note count and feeling everything.
+Currently, I am rehearsing with my blues band a bunch of heavy blues and classic rock tunes from Deep Purple, Jimi Hendrix, Doors...
 
-Currently, I am rehearsing a bunch of heavy blues and classic rock tunes from Deep Purple, Jimi Hendrix, and the Doors with my blues band.
-
-That makes playing just a hobby. So I use this website as a way to share my passion for our instrument and to welcome any guitar-related discussion about vintage guitars and gear.
+That makes playing just a hobby. So I use this website as a way for me to share my passion for our instrument and to welcome any guitar related discussion about the vintage guitars and gear.

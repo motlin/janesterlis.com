@@ -1,7 +1,7 @@
 - id: guitarhq-fender
   title: Guitar HQ, Fender
   url: https://www.guitarhq.com/fender.html
-  description: Tons of detail on vintage Strats and Teles, including how to date a guitar by its serial number.
+  description: This link gives ton of Fender Vintage Strats and Teles details.
 - id: guitarhq-gibson
   title: Guitar HQ, Gibson
   url: https://www.guitarhq.com/gibson.html
@@ -9,11 +9,11 @@
 - id: vintage-guitar
   title: Vintage Guitar magazine
   url: https://www.vintageguitar.com/
-  description: The holy grail for vintage guitar collectors.
+  description: Online Vintage Guitar magazine - holy grail for vintage guitar collectors
 - id: youtube
   title: Jan on YouTube
   url: https://www.youtube.com/@JanEsterlis
-  description: Some blues… and a lot more. New jams show up on the Videos page too.
+  description: some blues...
 - id: al-di-meola
   title: Al Di Meola
   url: https://aldimeola.com/

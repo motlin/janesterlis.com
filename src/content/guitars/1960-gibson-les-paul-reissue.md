@@ -7,4 +7,4 @@ alt: Cherry sunburst Gibson Les Paul on a stand
 audio: /audio/1960-les-paul-test.mp3
 ---
 
-A '60 reissue. Not an original. Sorry!
+( RI- sorry)
