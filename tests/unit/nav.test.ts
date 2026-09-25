@@ -9,6 +9,7 @@ describe("NAV_ITEMS", () => {
 			"Gallery",
 			"Listen",
 			"Videos",
+			"TV Appearances",
 			"Tabs",
 			"Links",
 		]);

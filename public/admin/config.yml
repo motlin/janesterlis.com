@@ -206,3 +206,19 @@ collections:
               - {name: title, label: Title}
               - {name: url, label: URL}
               - {name: description, label: Description}
+
+  - name: tv
+    label: TV Appearances
+    files:
+      - name: tv
+        label: TV appearances
+        file: /src/content/tv.yaml
+        fields:
+          - name: appearances
+            label: Appearances
+            widget: list
+            root: true
+            fields:
+              - {name: id, label: YouTube video ID, hint: "The part after watch?v=, e.g. RqKzTNR2bg8"}
+              - {name: title, label: Title}
+              - {name: date, label: Date aired, widget: datetime, time_format: false, format: YYYY-MM-DD}

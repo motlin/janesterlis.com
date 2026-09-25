@@ -1,0 +1,28 @@
+---
+import {getCollection} from "astro:content";
+import VideoCard from "../components/VideoCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {YOUTUBE_CHANNEL_URL} from "../lib/youtube";
+
+const appearances = (await getCollection("tv")).toSorted((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout title="TV Appearances" description="Jan Esterlis on RTVI, talking vintage guitars, auctions, and the guitar trade.">
+	<p class="eyebrow">On RTVI</p>
+	<h1>TV Appearances</h1>
+	<p class="lede">
+		Jan on RTVI, talking vintage guitars, famous auctions, and the guitar trade. More on his <a
+			href={YOUTUBE_CHANNEL_URL}
+			rel="noopener">YouTube channel</a
+		>.
+	</p>
+	<ul class="video-grid" aria-label="TV appearances">
+		{
+			appearances.map((appearance) => (
+				<li>
+					<VideoCard id={appearance.id} title={appearance.data.title} published={appearance.data.date} />
+				</li>
+			))
+		}
+	</ul>
+</BaseLayout>

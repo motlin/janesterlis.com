@@ -2,7 +2,7 @@
 
 ## The easy way: the editor at /admin
 
-Open <https://janesterlis.com/admin/> and sign in with GitHub. Pick a section (Gallery photos, Recordings, Tabs, Guitars, Gear, Pages, Links), click **New**, fill in the form, upload the photo or MP3, and click **Save**. Each save commits to GitHub, and the live site updates about a minute later.
+Open <https://janesterlis.com/admin/> and sign in with GitHub. Pick a section (Gallery photos, Recordings, Tabs, Guitars, Gear, Pages, Links, TV Appearances), click **New**, fill in the form, upload the photo or MP3, and click **Save**. Each save commits to GitHub, and the live site updates about a minute later.
 
 To try changes before they go live, run `just dev`, open <http://localhost:4321/admin/index.html> in Chrome, and choose **Work with Local Repository**. Edits land in your local files; preview them at <http://localhost:4321>, then commit and push.
 
@@ -104,4 +104,5 @@ Nothing to do. The Videos page and the home page read the latest uploads from [J
 
 - Gear: `src/content/gear/`, ordered by the `order` field.
 - Links: `src/content/links.yaml`.
+- TV appearances: `src/content/tv.yaml`. Each entry's `id` is the YouTube video ID. The Videos page only shows the channel's 15 newest uploads, so older TV segments are listed here by hand.
 - Home page and biography text: `src/content/pages/home.md` and `bio.md`.

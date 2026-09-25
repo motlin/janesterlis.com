@@ -3,7 +3,17 @@ import {expect, test} from "@playwright/test";
 test("site navigation reaches every section", async ({page, isMobile}) => {
 	await page.goto("/");
 	const nav = page.getByRole("navigation", {name: "Main"});
-	const sections = ["Biography", "Collection", "Gear", "Gallery", "Listen", "Videos", "Tabs", "Links"];
+	const sections = [
+		"Biography",
+		"Collection",
+		"Gear",
+		"Gallery",
+		"Listen",
+		"Videos",
+		"TV Appearances",
+		"Tabs",
+		"Links",
+	];
 
 	const openMenu = async (): Promise<void> => {
 		const menu = page.getByRole("button", {name: "Menu"});

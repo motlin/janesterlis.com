@@ -26,3 +26,13 @@ test("home page features the latest video", async ({page}) => {
 	await page.goto("/");
 	await expect(page.getByRole("region", {name: "Latest video"}).getByRole("button", {name: /^Play/})).toBeVisible();
 });
+
+test("TV appearances page lists Jan's RTVI segments", async ({page}) => {
+	await page.goto("/tv/");
+	await expect(page.getByRole("heading", {level: 1})).toHaveText("TV Appearances");
+	const appearances = page.getByRole("list", {name: "TV appearances"}).getByRole("listitem");
+	await expect(appearances).toHaveCount(12);
+	await expect(
+		appearances.first().getByRole("button", {name: "Play: Fake Gibsons trying to reach the US market"}),
+	).toBeVisible();
+});

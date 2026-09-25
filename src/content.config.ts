@@ -75,6 +75,15 @@ const links = defineCollection({
 	}),
 });
 
+// Entry ids are YouTube video ids. These are older than the channel feed's 15 most recent uploads, so they are listed by hand.
+const tv = defineCollection({
+	loader: file("./src/content/tv.yaml"),
+	schema: z.object({
+		title: z.string(),
+		date: z.coerce.date(),
+	}),
+});
+
 const tabs = defineCollection({
 	loader: glob({pattern: "*.md", base: "./src/content/tabs"}),
 	schema: z.object({
@@ -118,4 +127,4 @@ const videos = defineCollection({
 	}),
 });
 
-export const collections = {pages, guitars, gear, gallery, recordings, links, tabs, videos};
+export const collections = {pages, guitars, gear, gallery, recordings, links, tabs, tv, videos};
