@@ -58,3 +58,10 @@ for (const {path, heading} of pages) {
 		});
 	});
 }
+
+test("home page welcomes native Ukrainian-born guitar collectors", async ({page}) => {
+	await page.goto("/");
+	await expect(page.getByText(/native \S+ guitar collectors/)).toHaveText(
+		/start a meeting place for native Ukrainian-born guitar collectors and musicians\./,
+	);
+});

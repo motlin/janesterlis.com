@@ -7,6 +7,6 @@ On this site, I wish to provide an opportunity for ALL guitar enthusiasts to sha
 
 I hope you will find this site fun, as well as informative. There is a sound link I plan to publish all the guitar samples sent to me by the visitors. Pictures, featuring vintage guitars and gear, are welcome.
 
-One more thing, I would like to try to start a meeting place for native Russian-born guitar collectors and musicians. Often Americans don't think that such category of guitar enthusiasts exists at all, but we can prove them wrong! (joking…)
+One more thing, I would like to try to start a meeting place for native Ukrainian-born guitar collectors and musicians. Often Americans don't think that such category of guitar enthusiasts exists at all, but we can prove them wrong! (joking…)
 
 So, welcome, my dear guitar friends!
