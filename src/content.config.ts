@@ -23,7 +23,7 @@ const guitars = defineCollection({
 			family: z.enum(GUITAR_FAMILIES),
 			image: image(),
 			alt: z.string(),
-			audio: z.string().optional(),
+			audio: z.string().nullish(),
 		}),
 });
 
@@ -41,7 +41,7 @@ const gear = defineCollection({
 // `added` sorts newest first; `order` only breaks ties between entries added on the same day.
 const ordering = {
 	added: z.coerce.date(),
-	order: z.number().optional(),
+	order: z.number().nullish(),
 };
 
 const gallery = defineCollection({
@@ -51,7 +51,7 @@ const gallery = defineCollection({
 			image: image(),
 			alt: z.string(),
 			caption: z.string(),
-			year: z.number().int().optional(),
+			year: z.number().int().nullish(),
 			...ordering,
 		}),
 });
@@ -61,7 +61,7 @@ const recordings = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		file: z.string().startsWith("/audio/"),
-		year: z.number().int().optional(),
+		year: z.number().int().nullish(),
 		...ordering,
 	}),
 });
@@ -79,12 +79,12 @@ const tabs = defineCollection({
 	loader: glob({pattern: "*.md", base: "./src/content/tabs"}),
 	schema: z.object({
 		title: z.string(),
-		artist: z.string().optional(),
+		artist: z.string().nullish(),
 		date: z.coerce.date(),
 		tuning: z.array(z.string()).length(6).default(["E", "A", "D", "G", "B", "E"]),
-		key: z.string().optional(),
-		difficulty: z.enum(["beginner", "intermediate", "advanced"]).optional(),
-		recording: z.string().startsWith("/audio/").optional(),
+		key: z.string().nullish(),
+		difficulty: z.enum(["beginner", "intermediate", "advanced"]).nullish(),
+		recording: z.string().startsWith("/audio/").nullish(),
 		draft: z.boolean().default(false),
 	}),
 });

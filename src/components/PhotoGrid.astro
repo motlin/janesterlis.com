@@ -6,7 +6,7 @@ interface Photo {
 	image: ImageMetadata;
 	alt: string;
 	caption: string;
-	year?: number | undefined;
+	year?: number | null | undefined;
 }
 
 interface Props {
@@ -34,7 +34,7 @@ const items = await Promise.all(
 						</button>
 						<figcaption>
 							{photo.caption}
-							{photo.year !== undefined && <span class="year"> · {photo.year}</span>}
+							{typeof photo.year === "number" && <span class="year"> · {photo.year}</span>}
 						</figcaption>
 					</figure>
 				</li>

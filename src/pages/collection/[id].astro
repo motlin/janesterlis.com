@@ -34,7 +34,7 @@ const title = guitarTitle(guitar.data);
 			<h1>{title}</h1>
 			<div class="prose"><Content /></div>
 			{
-				guitar.data.audio !== undefined && (
+				typeof guitar.data.audio === "string" && (
 					<div class="recording">
 						<h2>Hear it</h2>
 						<audio controls preload="none" src={guitar.data.audio} />

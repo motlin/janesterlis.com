@@ -23,6 +23,7 @@ interface CmsCollection {
 
 interface CmsConfig {
 	backend: {name: string; repo: string; branch: string; base_url: string};
+	output?: {omit_empty_optional_fields?: boolean};
 	collections: CmsCollection[];
 }
 
@@ -48,6 +49,10 @@ describe("Sveltia CMS config", () => {
 			branch: "main",
 			base_url: "https://janesterlis-cms-auth.cmotlin.workers.dev",
 		});
+	});
+
+	it("omits empty optional fields instead of saving them as null", () => {
+		expect(config.output).toStrictEqual({omit_empty_optional_fields: true});
 	});
 
 	it("covers every content folder", () => {

@@ -1,6 +1,6 @@
 interface Ordered {
 	id: string;
-	data: {added: Date; order?: number | undefined};
+	data: {added: Date; order?: number | null | undefined};
 }
 
 /**

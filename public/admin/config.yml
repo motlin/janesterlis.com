@@ -16,6 +16,10 @@ display_url: https://janesterlis.com
 media_folder: /public/uploads
 public_folder: /uploads
 
+# Leave blank optional fields out of saved files; the content schemas would otherwise receive null.
+output:
+  omit_empty_optional_fields: true
+
 collections:
   - name: gallery
     label: Gallery photos
