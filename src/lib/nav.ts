@@ -6,7 +6,6 @@ export const NAV_ITEMS = [
 	{href: "/listen/", label: "Listen"},
 	{href: "/videos/", label: "Videos"},
 	{href: "/tv/", label: "TV Appearances"},
-	{href: "/tabs/", label: "Tabs"},
 	{href: "/links/", label: "Links"},
 ] as const;
 

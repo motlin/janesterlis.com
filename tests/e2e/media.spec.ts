@@ -34,16 +34,3 @@ test("every recording on the listen page is playable", async ({page, request}) =
 		expect(response.status(), source).toBe(200);
 	}
 });
-
-test("tab notation keeps its columns and scrolls inside its own box", async ({page}) => {
-	await page.goto("/tabs/twelve-bar-shuffle-in-a/");
-	const tab = page.locator("pre.tab").first();
-
-	await expect(tab).toBeVisible();
-	const style = await tab.evaluate((element) => {
-		const computed = getComputedStyle(element);
-		return {whiteSpace: computed.whiteSpace, overflowX: computed.overflowX};
-	});
-	expect(style).toStrictEqual({whiteSpace: "pre", overflowX: "auto"});
-	await expect(page.getByText("Standard (E A D G B E)")).toBeVisible();
-});

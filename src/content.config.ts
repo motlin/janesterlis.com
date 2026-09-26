@@ -84,20 +84,6 @@ const tv = defineCollection({
 	}),
 });
 
-const tabs = defineCollection({
-	loader: glob({pattern: "*.md", base: "./src/content/tabs"}),
-	schema: z.object({
-		title: z.string(),
-		artist: z.string().nullish(),
-		date: z.coerce.date(),
-		tuning: z.array(z.string()).length(6).default(["E", "A", "D", "G", "B", "E"]),
-		key: z.string().nullish(),
-		difficulty: z.enum(["beginner", "intermediate", "advanced"]).nullish(),
-		recording: z.string().startsWith("/audio/").nullish(),
-		draft: z.boolean().default(false),
-	}),
-});
-
 // Fetched from the channel's public feed on every build, so new uploads appear after the next deploy.
 const videos = defineCollection({
 	loader: {
@@ -127,4 +113,4 @@ const videos = defineCollection({
 	}),
 });
 
-export const collections = {pages, guitars, gear, gallery, recordings, links, tabs, tv, videos};
+export const collections = {pages, guitars, gear, gallery, recordings, links, tv, videos};

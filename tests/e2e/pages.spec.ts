@@ -10,8 +10,6 @@ const pages = [
 	{path: "/listen/", heading: "Listen"},
 	{path: "/videos/", heading: "Videos"},
 	{path: "/tv/", heading: "TV Appearances"},
-	{path: "/tabs/", heading: "Tabs"},
-	{path: "/tabs/twelve-bar-shuffle-in-a/", heading: "Twelve-Bar Shuffle in A"},
 	{path: "/links/", heading: "Links"},
 ];
 

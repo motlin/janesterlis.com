@@ -16,8 +16,7 @@ export default defineConfig({
 		{name: "mobile", use: {...devices["Pixel 7"]}},
 	],
 	webServer: {
-		// Drafts are built so the example tab can be tested; production builds hide them.
-		command: `SHOW_DRAFTS=true pnpm build && pnpm preview --port ${port} --ignore-lock`,
+		command: `pnpm build && pnpm preview --port ${port} --ignore-lock`,
 		url: `http://localhost:${port}`,
 		reuseExistingServer: !ci,
 		timeout: 180_000,

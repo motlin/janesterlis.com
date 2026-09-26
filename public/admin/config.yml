@@ -67,39 +67,6 @@ collections:
         required: false
       - {name: body, label: About this recording, widget: richtext, required: false}
 
-  - name: tabs
-    label: Tabs
-    label_singular: Tab
-    folder: /src/content/tabs
-    extension: md
-    format: frontmatter
-    create: true
-    slug: "{{title}}"
-    summary: "{{title}}{{draft | ternary(' (draft)', '')}}"
-    fields:
-      - {name: title, label: Title}
-      - {name: artist, label: Artist, required: false}
-      - {name: date, label: Date, widget: datetime, time_format: false, format: YYYY-MM-DD, default: "{{now}}"}
-      - name: tuning
-        label: Tuning, low string to high
-        hint: Leave empty for standard tuning (E A D G B E).
-        widget: list
-        required: false
-      - {name: key, label: Key, required: false}
-      - {name: difficulty, label: Level, widget: select, options: [beginner, intermediate, advanced], required: false}
-      - name: recording
-        label: Recording to play along with
-        widget: file
-        accept: "audio/mpeg"
-        media_folder: /public/audio
-        public_folder: /audio
-        required: false
-      - {name: draft, label: Draft (hidden from the live site), widget: boolean, default: false}
-      - name: body
-        label: Lesson and tab
-        widget: richtext
-        hint: "Put tablature in a code block with the language set to tab, so it keeps its columns."
-
   - name: guitars
     label: Guitars
     label_singular: Guitar

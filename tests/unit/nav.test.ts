@@ -10,7 +10,6 @@ describe("NAV_ITEMS", () => {
 			"Listen",
 			"Videos",
 			"TV Appearances",
-			"Tabs",
 			"Links",
 		]);
 	});
@@ -24,6 +23,6 @@ describe("isCurrent", () => {
 
 	it("does not match other sections or partial names", () => {
 		expect(isCurrent("/gear/", "/collection/")).toBe(false);
-		expect(isCurrent("/tabsheet/", "/tabs/")).toBe(false);
+		expect(isCurrent("/gearbox/", "/gear/")).toBe(false);
 	});
 });

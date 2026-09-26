@@ -2,11 +2,9 @@
 
 ## The easy way: the editor at /admin
 
-Open <https://janesterlis.com/admin/> and sign in with GitHub. Pick a section (Gallery photos, Recordings, Tabs, Guitars, Gear, Pages, Links, TV Appearances), click **New**, fill in the form, upload the photo or MP3, and click **Save**. Each save commits to GitHub, and the live site updates about a minute later.
+Open <https://janesterlis.com/admin/> and sign in with GitHub. Pick a section (Gallery photos, Recordings, Guitars, Gear, Pages, Links, TV Appearances), click **New**, fill in the form, upload the photo or MP3, and click **Save**. Each save commits to GitHub, and the live site updates about a minute later.
 
 To try changes before they go live, run `just dev`, open <http://localhost:4321/admin/index.html> in Chrome, and choose **Work with Local Repository**. Edits land in your local files; preview them at <http://localhost:4321>, then commit and push.
-
-For tabs, put the tablature in a code block and set its language to `tab` so the columns line up.
 
 ## By hand
 
@@ -68,33 +66,6 @@ added: 2026-10-01
 
 A few words about the recording.
 ```
-
-## A guitar tab
-
-Add a Markdown file to `src/content/tabs/`. Write the tab itself inside a fenced block marked `tab`, and it keeps its columns on every screen size.
-
-````markdown
----
-title: Slow blues turnaround in A
-date: 2026-10-01
-key: A
-difficulty: intermediate
-recording: /audio/turnaround-demo.mp3
----
-
-A turnaround I use at the end of every chorus.
-
-```tab
-e|-----------------5-8-5-----|
-B|---------5-8-5-8-------8---|
-G|-5-7-5-7-------------------|
-D|---------------------------|
-A|---------------------------|
-E|---------------------------|
-```
-````
-
-`tuning` defaults to standard. Set it for anything else, for example `tuning: [D, A, D, G, B, E]` shows "Drop D". Add `draft: true` to keep a tab hidden from the live site while you work on it; drafts still show under `just dev`.
 
 ## YouTube videos
 
