@@ -26,6 +26,14 @@ export default defineConfig({
 	},
 	run: {
 		tasks: {
+			// Generates .astro/ types that type-aware lint needs to resolve astro:content.
+			"astro:sync": {
+				command: "astro sync",
+			},
+			check: {
+				command: "vp check",
+				dependsOn: ["astro:sync"],
+			},
 			"test:run": {
 				command: "node node_modules/vitest/dist/cli.js run",
 				input: [{auto: true}, "!node_modules/.experimental-vitest-cache/**"],
