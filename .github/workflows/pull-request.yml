@@ -66,6 +66,7 @@ jobs:
           HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
         run: |
           vp install
+          vp exec astro sync
           vp check --fix
 
           if [[ -n $(git status --porcelain) ]]; then
