@@ -10,7 +10,7 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"check": "vp check",
+		"check": "astro sync && vp check",
 		"oxlint": "vp lint . --fix",
 		"oxlint:ci": "vp lint . --format github",
 		"fmt": "vp fmt",
