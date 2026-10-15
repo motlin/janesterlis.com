@@ -27,7 +27,7 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.10",
-		"@playwright/test": "^1.63.0",
+		"@playwright/test": "^1.64.0",
 		"@types/node": "^26.6.4",
 		"fallow": "^3.32.0",
 		"markdownlint-cli2": "^0.23.2",
