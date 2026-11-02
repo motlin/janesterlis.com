@@ -2,18 +2,25 @@ export const GUITAR_FAMILIES = ["gibson", "stratocaster", "telecaster", "other"]
 
 export type GuitarFamily = (typeof GUITAR_FAMILIES)[number];
 
-export const FAMILY_LABELS: Record<GuitarFamily, string> = {
+export const FAMILY_LABELS: Record<GuitarFamily, string> =
+{
 	gibson: "Gibsons",
 	stratocaster: "Stratocasters",
 	telecaster: "Telecasters",
 	other: "And more",
 };
 
-interface Sortable {
-	data: {family: GuitarFamily; year: number};
+interface Sortable
+{
+	data:
+	{
+		family: GuitarFamily;
+		year: number;
+	};
 }
 
-export function sortGuitars<T extends Sortable>(guitars: readonly T[]): T[] {
+export function sortGuitars<T extends Sortable>(guitars: readonly T[]): T[]
+{
 	return guitars.toSorted(
 		(a, b) =>
 			GUITAR_FAMILIES.indexOf(a.data.family) - GUITAR_FAMILIES.indexOf(b.data.family) ||
@@ -21,6 +28,7 @@ export function sortGuitars<T extends Sortable>(guitars: readonly T[]): T[] {
 	);
 }
 
-export function guitarTitle({year, model}: {year: number; model: string}): string {
+export function guitarTitle({year, model}: {year: number; model: string}): string
+{
 	return `${year} ${model}`;
 }

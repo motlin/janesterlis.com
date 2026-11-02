@@ -1,16 +1,48 @@
 import {expect, test} from "@playwright/test";
 
-test("collection lists the ten captioned guitars and links to each", async ({page}) => {
+test("collection lists the ten captioned guitars and links to each", async ({page}) =>
+{
 	await page.goto("/collection/");
-	await expect(page.getByRole("list", {name: "Guitars"}).getByRole("listitem")).toHaveCount(10);
+	await expect(
+		page
+			.getByRole(
+				"list",
+				{
+					name: "Guitars",
+				},
+			)
+			.getByRole("listitem"),
+	).toHaveCount(10);
 
-	await page.getByRole("link", {name: "1964 Fender Stratocaster, Olympic White"}).click();
-	await expect(page.getByRole("heading", {level: 1})).toHaveText("1964 Fender Stratocaster, Olympic White");
+	await page
+		.getByRole(
+			"link",
+			{
+				name: "1964 Fender Stratocaster, Olympic White",
+			},
+		)
+		.click();
+	await expect(
+		page.getByRole(
+			"heading",
+			{
+				level: 1,
+			},
+		),
+	).toHaveText("1964 Fender Stratocaster, Olympic White");
 });
 
-test("gallery photos open in a lightbox that closes with Escape", async ({page}) => {
+test("gallery photos open in a lightbox that closes with Escape", async ({page}) =>
+{
 	await page.goto("/gallery/");
-	await page.getByRole("button", {name: /Al Di Meola/}).click();
+	await page
+		.getByRole(
+			"button",
+			{
+				name: /Al Di Meola/,
+			},
+		)
+		.click();
 
 	const dialog = page.getByRole("dialog");
 	await expect(dialog).toBeVisible();
@@ -20,7 +52,8 @@ test("gallery photos open in a lightbox that closes with Escape", async ({page})
 	await expect(dialog).toBeHidden();
 });
 
-test("every recording on the listen page is playable", async ({page, request}) => {
+test("every recording on the listen page is playable", async ({page, request}) =>
+{
 	await page.goto("/listen/");
 	const sources = await page
 		.locator("audio")
@@ -29,7 +62,8 @@ test("every recording on the listen page is playable", async ({page, request}) =
 		);
 
 	expect(sources.length).toBeGreaterThanOrEqual(2);
-	for (const source of sources) {
+	for (const source of sources)
+	{
 		const response = await request.head(source);
 		expect(response.status(), source).toBe(200);
 	}

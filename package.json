@@ -4,7 +4,8 @@
 	"private": true,
 	"description": "Jan Esterlis :: Vintage Guitars and Good Music",
 	"type": "module",
-	"scripts": {
+	"scripts":
+	{
 		"preinstall": "npx only-allow pnpm",
 		"dev": "astro dev",
 		"build": "astro build",
@@ -21,11 +22,13 @@
 		"test:e2e": "playwright test",
 		"prepare": "VITE_GIT_HOOKS=0 vp config"
 	},
-	"dependencies": {
+	"dependencies":
+	{
 		"astro": "^7.4.5",
 		"sharp": "^0.35.5"
 	},
-	"devDependencies": {
+	"devDependencies":
+	{
 		"@astrojs/check": "^0.9.12",
 		"@playwright/test": "^1.64.1",
 		"@types/node": "^26.6.6",
@@ -36,7 +39,8 @@
 		"vitest": "catalog:",
 		"yaml": "^2.9.1"
 	},
-	"engines": {
+	"engines":
+	{
 		"node": ">=22.12.0"
 	},
 	"packageManager": "pnpm@12.4.1"

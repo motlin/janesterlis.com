@@ -24,8 +24,10 @@ Line &quot;two&quot;</media:description>
 	</entry>
 </feed>`;
 
-describe("parseYouTubeFeed", () => {
-	it("extracts each video's id, decoded title, publish date, and description", () => {
+describe("parseYouTubeFeed", () =>
+{
+	it("extracts each video's id, decoded title, publish date, and description", () =>
+	{
 		expect(parseYouTubeFeed(feed)).toStrictEqual([
 			{
 				id: "abc123",
@@ -42,11 +44,13 @@ describe("parseYouTubeFeed", () => {
 		]);
 	});
 
-	it("returns no videos for a feed without entries", () => {
+	it("returns no videos for a feed without entries", () =>
+	{
 		expect(parseYouTubeFeed("<feed><title>Empty</title></feed>")).toStrictEqual([]);
 	});
 
-	it("skips entries missing a video id or date", () => {
+	it("skips entries missing a video id or date", () =>
+	{
 		expect(parseYouTubeFeed("<feed><entry><title>Broken</title></entry></feed>")).toStrictEqual([]);
 	});
 });

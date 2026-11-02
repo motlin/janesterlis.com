@@ -1,25 +1,60 @@
 import {expect, test} from "@playwright/test";
 
 const pages = [
-	{path: "/", heading: "Jan Esterlis"},
-	{path: "/bio/", heading: "Biography"},
-	{path: "/collection/", heading: "The Collection"},
-	{path: "/collection/1961-gibson-sg/", heading: "1961 Gibson SG"},
-	{path: "/gear/", heading: "Gear"},
-	{path: "/gallery/", heading: "Friends & Gallery"},
-	{path: "/listen/", heading: "Listen"},
-	{path: "/videos/", heading: "Videos"},
-	{path: "/tv/", heading: "TV Appearances"},
-	{path: "/links/", heading: "Links"},
+	{
+		path: "/",
+		heading: "Jan Esterlis",
+	},
+	{
+		path: "/bio/",
+		heading: "Biography",
+	},
+	{
+		path: "/collection/",
+		heading: "The Collection",
+	},
+	{
+		path: "/collection/1961-gibson-sg/",
+		heading: "1961 Gibson SG",
+	},
+	{
+		path: "/gear/",
+		heading: "Gear",
+	},
+	{
+		path: "/gallery/",
+		heading: "Friends & Gallery",
+	},
+	{
+		path: "/listen/",
+		heading: "Listen",
+	},
+	{
+		path: "/videos/",
+		heading: "Videos",
+	},
+	{
+		path: "/tv/",
+		heading: "TV Appearances",
+	},
+	{
+		path: "/links/",
+		heading: "Links",
+	},
 ];
 
-for (const {path, heading} of pages) {
-	test.describe(path, () => {
-		test("renders its heading and title without errors", async ({page}) => {
+for (const {path, heading} of pages)
+{
+	test.describe(path, () =>
+	{
+		test("renders its heading and title without errors", async ({page}) =>
+		{
 			const errors: string[] = [];
 			page.on("pageerror", (error) => errors.push(error.message));
-			page.on("console", (message) => {
-				if (message.type() === "error") {
+			page.on("console", (message) =>
+			{
+				if (message.type() === "error")
+				{
 					errors.push(message.text());
 				}
 			});
@@ -27,15 +62,24 @@ for (const {path, heading} of pages) {
 			const response = await page.goto(path);
 
 			expect(response?.status()).toBe(200);
-			await expect(page.getByRole("heading", {level: 1})).toHaveText(heading);
+			await expect(
+				page.getByRole(
+					"heading",
+					{
+						level: 1,
+					},
+				),
+			).toHaveText(heading);
 			await expect(page).toHaveTitle(/Jan Esterlis/);
 			expect(errors).toStrictEqual([]);
 		});
 
-		test("loads every image", async ({page}) => {
+		test("loads every image", async ({page}) =>
+		{
 			await page.goto(path);
 			const visible = page.locator("main img:visible");
-			for (const image of await visible.all()) {
+			for (const image of await visible.all())
+			{
 				await image.scrollIntoViewIfNeeded();
 				await expect(image).toHaveJSProperty("complete", true);
 			}
@@ -47,7 +91,8 @@ for (const {path, heading} of pages) {
 			expect(broken).toStrictEqual([]);
 		});
 
-		test("does not scroll horizontally", async ({page}) => {
+		test("does not scroll horizontally", async ({page}) =>
+		{
 			await page.goto(path);
 			const overflow = await page.evaluate(
 				() => document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -57,7 +102,8 @@ for (const {path, heading} of pages) {
 	});
 }
 
-test("home page welcomes native Ukrainian-born guitar collectors", async ({page}) => {
+test("home page welcomes native Ukrainian-born guitar collectors", async ({page}) =>
+{
 	await page.goto("/");
 	await expect(page.getByText(/native \S+ guitar collectors/)).toHaveText(
 		/start a meeting place for native Ukrainian-born guitar collectors and musicians\./,
