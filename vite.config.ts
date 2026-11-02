@@ -2,27 +2,12 @@ import {defineConfig} from "vite-plus";
 
 process.title = "janesterlis-com";
 
-// Astro owns dev/build (astro.config.mjs); this file configures only Vite+ fmt, lint, and test tasks.
+// Astro owns dev/build (astro.config.mjs); this file configures only Vite+ lint and test tasks.
 
 export default defineConfig({
-	fmt: {
-		semi: true,
-		singleQuote: false,
-		useTabs: true,
-		tabWidth: 4,
-		printWidth: 120,
-		bracketSpacing: false,
-		trailingComma: "all",
-		arrowParens: "always",
-		overrides: [
-			{
-				files: [".yamllint.yaml", "**/*.yaml", "**/*.yml"],
-				options: {
-					useTabs: false,
-					tabWidth: 2,
-				},
-			},
-		],
+	// Formatting runs through oxfmt-next-line (configured in .oxfmtrc.json), not Vite+'s bundled oxfmt.
+	check: {
+		fmt: false,
 	},
 	run: {
 		tasks: {
