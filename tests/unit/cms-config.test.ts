@@ -2,28 +2,41 @@ import {existsSync, readdirSync, readFileSync} from "node:fs";
 import {join} from "node:path";
 import {parse} from "yaml";
 
-interface CmsField {
+interface CmsField
+{
 	name: string;
 	widget?: string;
 	fields?: CmsField[];
 }
 
-interface CmsFile {
+interface CmsFile
+{
 	name: string;
 	file: string;
 	fields: CmsField[];
 }
 
-interface CmsCollection {
+interface CmsCollection
+{
 	name: string;
 	folder?: string;
 	files?: CmsFile[];
 	fields?: CmsField[];
 }
 
-interface CmsConfig {
-	backend: {name: string; repo: string; branch: string; base_url: string};
-	output?: {omit_empty_optional_fields?: boolean};
+interface CmsConfig
+{
+	backend:
+	{
+		name: string;
+		repo: string;
+		branch: string;
+		base_url: string;
+	};
+	output?:
+	{
+		omit_empty_optional_fields?: boolean;
+	};
 	collections: CmsCollection[];
 }
 
@@ -31,45 +44,65 @@ const root = join(import.meta.dirname, "../..");
 const config = parse(readFileSync(join(root, "public/admin/config.yml"), "utf8")) as CmsConfig;
 const repoPath = (path: string): string => join(root, path.replace(/^\//, ""));
 
-const frontmatter = (path: string): Record<string, unknown> => {
+const frontmatter = (path: string): Record<string, unknown> =>
+{
 	const match = /^---\n([\s\S]*?)\n---/.exec(readFileSync(path, "utf8"));
 	return match?.[1] === undefined ? {} : (parse(match[1]) as Record<string, unknown>);
 };
 
-const undeclaredKeys = (path: string, fields: CmsField[]): string[] => {
+const undeclaredKeys = (path: string, fields: CmsField[]): string[] =>
+{
 	const declared = new Set(fields.map((field) => field.name));
 	return Object.keys(frontmatter(path)).filter((key) => !declared.has(key));
 };
 
-describe("Sveltia CMS config", () => {
-	it("commits to the site's GitHub repository", () => {
-		expect(config.backend).toStrictEqual({
-			name: "github",
-			repo: "motlin/janesterlis.com",
-			branch: "main",
-			base_url: "https://janesterlis-cms-auth.cmotlin.workers.dev",
-		});
+describe("Sveltia CMS config", () =>
+{
+	it("commits to the site's GitHub repository", () =>
+	{
+		expect(config.backend).toStrictEqual(
+			{
+				name: "github",
+				repo: "motlin/janesterlis.com",
+				branch: "main",
+				base_url: "https://janesterlis-cms-auth.cmotlin.workers.dev",
+			},
+		);
 	});
 
-	it("omits empty optional fields instead of saving them as null", () => {
-		expect(config.output).toStrictEqual({omit_empty_optional_fields: true});
+	it("omits empty optional fields instead of saving them as null", () =>
+	{
+		expect(config.output).toStrictEqual(
+			{
+				omit_empty_optional_fields: true,
+			},
+		);
 	});
 
-	it("covers every content folder", () => {
+	it("covers every content folder", () =>
+	{
 		const cmsFolders = config.collections.flatMap((collection) =>
 			collection.folder === undefined ? [] : [collection.folder],
 		);
-		const contentFolders = readdirSync(join(root, "src/content"), {withFileTypes: true})
+		const contentFolders = readdirSync(
+			join(root, "src/content"),
+			{
+				withFileTypes: true,
+			},
+		)
 			.filter((entry) => entry.isDirectory() && entry.name !== "pages")
 			.map((entry) => `/src/content/${entry.name}`);
 
 		expect(cmsFolders.toSorted()).toStrictEqual(contentFolders.toSorted());
 	});
 
-	for (const collection of config.collections) {
-		if (collection.folder !== undefined) {
+	for (const collection of config.collections)
+	{
+		if (collection.folder !== undefined)
+		{
 			const {folder, fields = []} = collection;
-			it(`${collection.name}: declares every frontmatter key used by existing entries`, () => {
+			it(`${collection.name}: declares every frontmatter key used by existing entries`, () =>
+			{
 				const entries = readdirSync(repoPath(folder)).filter((name) => name.endsWith(".md"));
 				const problems = entries.flatMap((entry) =>
 					undeclaredKeys(join(repoPath(folder), entry), fields).map((key) => `${entry}: ${key}`),
@@ -80,8 +113,10 @@ describe("Sveltia CMS config", () => {
 			});
 		}
 
-		for (const file of collection.files ?? []) {
-			it(`${collection.name}/${file.name}: points at an existing file and declares all its keys`, () => {
+		for (const file of collection.files ?? [])
+		{
+			it(`${collection.name}/${file.name}: points at an existing file and declares all its keys`, () =>
+			{
 				expect(existsSync(repoPath(file.file))).toBe(true);
 				expect(undeclaredKeys(repoPath(file.file), file.fields)).toStrictEqual([]);
 			});

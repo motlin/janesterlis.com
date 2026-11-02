@@ -1,7 +1,9 @@
 // @ts-check
 import {defineConfig} from "astro/config";
 
-export default defineConfig({
-	site: "https://janesterlis.com",
-	trailingSlash: "always",
-});
+export default defineConfig(
+	{
+		site: "https://janesterlis.com",
+		trailingSlash: "always",
+	},
+);
