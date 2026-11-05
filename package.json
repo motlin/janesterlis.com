@@ -22,7 +22,7 @@
 		"prepare": "VITE_GIT_HOOKS=0 vp config"
 	},
 	"dependencies": {
-		"astro": "^7.4.2",
+		"astro": "^7.4.4",
 		"sharp": "^0.35.5"
 	},
 	"devDependencies": {
