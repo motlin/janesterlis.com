@@ -6,7 +6,7 @@ minimumReleaseAgeStrict: true
 minimumReleaseAgeIgnoreMissingTime: false
 # Astro bundles its own Vite, so unlike typescript-template there is no vite override here.
 catalog:
-  vitest: 5.0.5
+  vitest: 5.1.0
   vite-plus: 1.5.0
 allowBuilds:
   esbuild: true
